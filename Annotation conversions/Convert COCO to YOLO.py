@@ -1,4 +1,6 @@
-## Defines functions first; implementation is on last 2 lines
+# Built from a foundation based on: https://gist.github.com/iagorrr ; Thank you!
+
+# Defines functions first; implementation is on last 2 lines
 import os
 import json
 from tqdm import tqdm
