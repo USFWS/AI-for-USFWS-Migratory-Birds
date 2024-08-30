@@ -1,4 +1,3 @@
-##
 ### CONVERT YOLO LABEL FILES (.TXT) TO A CSV
 
 library (tidyr)
