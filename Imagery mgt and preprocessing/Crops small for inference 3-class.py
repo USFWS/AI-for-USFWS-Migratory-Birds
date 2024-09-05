@@ -66,5 +66,4 @@ for index, row in matches.iterrows():  ## iterrows: Pandas iterate over rows
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
 
-    cv.imwrite(export_path + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
     print("writing!")
