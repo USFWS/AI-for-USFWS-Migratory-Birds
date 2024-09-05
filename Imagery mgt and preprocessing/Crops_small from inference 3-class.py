@@ -6,6 +6,7 @@ import os
 # export_path_[bird/nonbird/artif] = specify folders for each class
 path = "D:/images_w_objects_2024/2024_Jan5_parent_images/"
 csv_data = pandas.read_csv("D:/YOLO_2024_Jan5_detections.csv")
+
 export_path_bird = "D:/detection_crops_for_inference_2024/2024_Jan5_bird_crops/"
 export_path_nonbird = "D:/detection_crops_for_inference_2024/2024_Jan5_nonbird_crops/"
 export_path_artif = "D:/detection_crops_for_inference_2024/2024_Jan5_artif_crops/"
@@ -50,18 +51,17 @@ for index, row in matches.iterrows():  ## iterrows: Pandas iterate over rows
     # print(xmin_box, ymin_box, xmax_box, ymax_box)
 
     # Specify each class name below (cat1, cat2, etc.)
-    if cat1 == "bird":
+    if cat1 == "bird" or cat1 == 1:
         export_path = export_path_bird
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
-        temp5 = export_path + row['unique_BB'] + '.jpg'
 
-    if cat1 == "nonbird":
+    if cat1 == "nonbird" or cat1 == 3:
         export_path = export_path_nonbird
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
 
-    if cat1 == "manmade":
+    if cat1 == "manmade" or cat1 == 2:
         export_path = export_path_artif
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
