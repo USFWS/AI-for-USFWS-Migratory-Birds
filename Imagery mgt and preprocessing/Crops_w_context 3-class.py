@@ -61,14 +61,14 @@ for index, row in matches.iterrows():  ## iterrows: Pandas iterate over rows
     # (x, y starting points), (x,y end points)
     cv.rectangle(temp1, (xmin_box, ymin_box), (xmax_box, ymax_box), (0, 255, 0))
     ############# INPUT HERE
-    if cat1 == "bird" or 1:
+    if cat1 == "bird" or cat1 == 1:
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path_bird + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
 
-    if cat1 == "nonbird" or 2:
+    if cat1 == "nonbird" or cat1 == 2:
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path_nonbird + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
 
-    if cat1 == "manmade" or 3:
+    if cat1 == "manmade" or cat1 == 3:
         crops = temp1[y:(y + h), x:(x + w)]
         cv.imwrite(export_path_artif + row['unique_BB'] + '.jpg', crops, [int(cv.IMWRITE_JPEG_QUALITY), 95])
