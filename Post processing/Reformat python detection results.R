@@ -5,13 +5,14 @@ library(tidyverse)
                          
 setwd(file.path('C:', 'Users', 'Aware', 'Desktop'))
 
-# Inputs: data1 = data tables resulting from YOLO runs with columns of
+# Inputs: data1 = data tables resulting from YOLO run with columns of
 # score, class, bbox
-data1 <- read.table ("D:/YOLO_2024_Jan5_total.csv",sep = ",", 
+#   new_csv = name of new results file
+data1 <- read.table ("D:/AMAPPS/YOLOv8_2024_Aug26.csv",sep = ",", 
                      header=TRUE, fill=TRUE)
 
 # Input name newly formatted csv and RuN!
-new_csv <- "YOLO_2024_Jan5_reformat.csv"
+new_csv <- "D:/AMAPPS/YOLOv8_2024_Aug26_reformat.csv"
 
 # fix score, class
 data1$score <- gsub("PredictionScore: <value: ", "", data1$score)
@@ -58,3 +59,4 @@ data3 <- data2[, c("class", "score", "xmin", "ymin", "w", "h", "unique_image_jpg
 
 ### write table
 write.table(data3,new_csv, sep=",", row.names=FALSE)
+
