@@ -1,0 +1,50 @@
+[
+  {
+    "name": "AI-for-USFWS",
+    "organization": "U.S. Fish & Wildlife Service",
+    "description": "Computer Vision/AI Repository",
+    "version": "0.1.0",
+    "status": "Development",
+
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Apache-2.0 license",
+          "URL": " https://github.com/USFWS/AI-for-USFWS/blob/main/LICENSE.md"
+        }
+      ]
+    },
+
+    "homepageURL": " https://github.com/USFWS/AI-for-USFWS",
+    "downloadURL": " https://github.com/USFWS/AI-for-USFWS.git",
+    "disclaimerURL": " https://github.com/USFWS/AI-for-USFWS/blob/main/Disclaimer.md",
+    "repositoryURL": "https://github.com/USFWS/AI-for-USFWS "
+,
+
+    "laborHours": 22,
+
+    "tags": [
+      "AI",
+      "usfws"
+    ],
+
+    "languages": [
+      "r",
+      "json",
+      "md",
+	"py"
+	"ipynb"
+    ],
+
+    "contact": {
+      "name": "Bradley Pickens",
+      "email": "bradley_pickens@fws.gov"
+    },
+
+    "date": {
+      "metadataLastUpdated": "2024-09-10"
+    }
+  }
+]
+
