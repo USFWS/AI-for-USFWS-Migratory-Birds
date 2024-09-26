@@ -1,1 +1,40 @@
+# We are grateful for Ultralytics' work in this area of detection research! It is fantastic! 
+# Please see the tutorial here for more guidance on how to start: https://docs.ultralytics.com/yolov5/quickstart_tutorial/
+# Also, see here for the Github repository for yolov5: https://github.com/ultralytics/yolov5
 
+# All annotation data must be in YOLO format
+# Your imagery and labels must be in a specific folder structure: /directory1/train/images and directory/train/labels AND
+# /directory1/val/images and /directory1/val/labels ; These file paths will be specified in your opt.yaml file; please see template
+# in this repository
+
+# Once the Python requirements are met, do the following:
+
+# In Python terminal, implement YOLOv5 train and test in the directory of the yolov5 library:
+cd "C:/Users/user_name/envs/sacr1/Lib/site-packages/yolov5"
+
+# Go to this virtual environment folder, save the "opt.yaml" file there; see the "opt_template.yaml" in this repository
+# In the opt.yaml file, you will need to specify file paths to the train and test datasets, class names and their indices, plus a     # large array of hyperparameters for running the model (or use the defaults)
+
+# Then, in the Python command line, type:
+
+$ python train.py --img [736] --epochs [175] --data opt.yaml --weights [yolov5s.pt]
+--data opt.yaml --device "cuda:[1]"
+
+[ ] = indicate custom names or numbers you will need to add; [] will not actually be in your code
+
+# Python will run the epochs and will state where the outputs were saved 
+# Available YOLOv5 models include yolov5n.pt, yolov5s.pt, yolov5m.pt, yolov5l.pt, yolov5x.pt 
+
+# Citation
+# If you use YOLOv5 or YOLOv5u in your research, please cite the Ultralytics YOLOv5 repository as follows:
+
+# @software{yolov5,
+ # title = {YOLOv5 by Ultralytics},
+  # author = {Glenn Jocher},
+  # year = {2020},
+  # version = {7.0},
+  # license = {AGPL-3.0},
+  # url = {https://github.com/ultralytics/yolov5},
+  # doi = {10.5281/zenodo.3908559},
+  # orcid = {0000-0001-5950-6979}
+# }
