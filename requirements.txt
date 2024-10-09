@@ -1,0 +1,14 @@
+pandas~=2.1.3
+opencv-python~=4.8.1.78
+sahi~=0.11.18
+ultralytics~=8.2.10
+pycocotools~=2.0.8
+numpy~=1.26.2
+labelme2coco~=0.2.6
+tqdm~=4.66.1
+pillow~=10.3.0
+pipreqs~=0.5.0
+label-studio-converter~=0.0.59
+pytorch~=2.1.1
+pascal_voc_writer~=2.1.1
+yolov5~=7.0.13
