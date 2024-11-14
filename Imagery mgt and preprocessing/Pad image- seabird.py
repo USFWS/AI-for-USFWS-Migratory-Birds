@@ -11,7 +11,7 @@ def pad_this (img):
     pad_h = 134
     temp1 = Image.open(img)
     padding = (pad_w, pad_h, pad_w, pad_h)
-    pad_img = ImageOps.expand(temp1, padding)
+    pad_img = ImageOps.expand(temp1, padding)  # can also add option for fill=(R,G,B)
     pad_img.save (export_path + img, quality = 95)
     print ("padded!")
 
