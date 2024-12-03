@@ -41,7 +41,7 @@ xml_base = basename(xml_address)
 xml_base = substr(xml_base,1,nchar(xml_base)-4)
 
 
-output_file <- paste0("Metadata_",xml_base,".csv")
+output_file <- paste0("Metadata_",xml_base,"_images.csv")
 
 output_cam <- paste0("Metadata_", xml_base,"_cameras.csv")
 output_detections <- paste0("Metadata_", xml_base,"_detections.csv")
