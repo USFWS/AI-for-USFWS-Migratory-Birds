@@ -69,11 +69,6 @@ csv_data['ymin'] = csv_data['ymin'].astype(float).round().astype(int).astype(str
 csv_data['w'] = csv_data['w'].astype(float).round().astype(int).astype(str)
 csv_data['h'] = csv_data['h'].astype(float).round().astype(int).astype(str)
 
-csv_data['ymin'].round(0)
-
-#csv_data['w'].round(0)
-#csv_data['h'].round(0)
-
 csv_data['unique_BB'] = csv_data['temp_name'] + "_" + csv_data['xmin'] + "_" + csv_data['ymin'] + "_" + csv_data['w']+ "_" + csv_data['h']
 del csv_data['bbox']
 del csv_data['xmax']
