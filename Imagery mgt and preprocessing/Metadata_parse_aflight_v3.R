@@ -304,8 +304,8 @@ a4$class <- a4$class_ID
 a4$class_ID <- NULL
 a4$unique_image <- NULL
 
-a4$x_min <- a4$x1
-a4$y_min <- a4$y1
+a4$xmin <- a4$x1
+a4$ymin <- a4$y1
 a4$h <- (a4$y2 - a4$y1)
 a4$w <- (a4$x2 - a4$x1)
 
@@ -319,14 +319,14 @@ a4$y2 <- NULL
 
 a5 <- merge(a3,a4, by="imageGUID", x.all = TRUE, y.all= FALSE)
 
-a5$unique_BB <- paste0(a5$unique_image,"_",a4$x_min,"_",a4$y_min,"_", a4$w, "_",a4$h)
+a5$unique_BB <- paste0(a5$unique_image,"_",a4$xmin,"_",a4$ymin,"_", a4$w, "_",a4$h)
 a5$imageGUID <- NULL
 a5$unique_image <- NULL
 a5$flight_name <- NULL
 names(a5)
 
 
-a5 <- a5[,c("class","score", "x_min", "y_min", "w", "h", "unique_image_jpg", "unique_BB")]
+a5 <- a5[,c("unique_image_jpg", "class","score", "xmin", "ymin", "w", "h", "unique_BB")]
 
 write.table(a5, output_detections, sep =",", row.names=FALSE)
 
