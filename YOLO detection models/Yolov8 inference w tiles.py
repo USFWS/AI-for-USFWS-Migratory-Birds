@@ -46,3 +46,23 @@ for root, dirs, files in os.walk(root_dir):
             writer = csv.writer(file)
             for result1 in object_prediction_list:
                 writer.writerow([source, result1.bbox, result1.category, result1.score])
+    
+csv_data = pd.read_csv(new_csv)
+
+filename = csv_data['unique_image_jpg']
+bbox = csv_data['bbox']
+csv_data['score'] = csv_data['score'].str.replace(r"PredictionScore: <value: ", '', regex=True)
+csv_data['score'] = csv_data['score'].str.replace(r">", '', regex=True)
+csv_data['class'] = csv_data['class'].str.replace(r"Category: <id:", '', regex=True)
+csv_data['class'] = csv_data['class'].str.replace(r"name: ", '', regex=True)
+csv_data['class'] = csv_data['class'].str.replace(r">", '', regex=True)
+csv_data['bbox'] = csv_data['bbox'].str.replace(r"BoundingBox: <", '', regex= True)
+csv_data['bbox'] = csv_data['bbox'].str.replace(r">", '', regex= True)
+csv_data[['xmin', 'ymin', 'xmax', 'ymax', 'w', 'h']] = csv_data['bbox'].str.split(',', expand=True)
+csv_data['h'] = csv_data['h'].str.replace(r"h: ", '', regex= True)
+csv_data['w'] = csv_data['w'].str.replace(r"w: ", '', regex= True)
+csv_data['xmin'] = csv_data['xmin'].str.replace(r"(", '', regex= False)
+del csv_data['bbox']
+csv_data.to_csv(new_csv)
+
+
