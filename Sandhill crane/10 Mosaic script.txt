@@ -1,0 +1,8 @@
+To be conducted with ossim software in Linux:
+https://trac.osgeo.org/ossim/
+
+Produce geometry files:
+$ ./ossim-applanix2ogeom [camera_file] [exterior_orientation_file]  [output_directory]
+
+Orthorectify and mosaic together:
+$ /home/username/build/bin/ossim-orthoigen --utm --meters 0.103 --combiner-type ossimClosestToCenterCombiner -P /home/username/ossim/prefs.txt [image list] [output_image name]
