@@ -26,10 +26,13 @@ with open(new_csv, 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['unique_image_jpg', "bbox", "class", "score"])
 
+x=0
 for root, dirs, files in os.walk(root_dir):
     for file in files:
         source = os.path.join(root, file)
         print(source)
+        x= x+1
+        print("Processing image: ", x)
         result = sahi.predict.get_sliced_prediction(
             source,
             detection_model,
