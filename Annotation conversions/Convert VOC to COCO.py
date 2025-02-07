@@ -1,9 +1,10 @@
-xml_path = 'C:/Users/aware/Desktop/text_xml'
-json_file = 'C:/users/aware/desktop/crazy.json'
-
 import xml.etree.ElementTree as ET
 import os
 import json
+
+# Inputs: xml_path = directory with xml files, json_file = name of json to export
+xml_path = 'C:/Users/aware/Desktop/text_xml'
+json_file = 'C:/users/aware/desktop/crazy.json'
 
 l1 = os.listdir(xml_path)
 print(l1)
