@@ -3,12 +3,12 @@ import os
 import json
 import pandas as pd
 
+# Inputs: xml_path = path to directory of xml files, json_file = name of json to export, final_csv= name of csv to export
 xml_path = 'C:/Users/aware/Desktop/tile_annot_not_reviewed'
 json_file = 'C:/users/aware/desktop/crazy.json'
-
 final_csv = "C:/Users/aware/desktop/converted_voc_to_csv.csv"
-filename = json_file
 
+filename = json_file
 #l1 = os.listdir(xml_path)
 #print(l1)
 
