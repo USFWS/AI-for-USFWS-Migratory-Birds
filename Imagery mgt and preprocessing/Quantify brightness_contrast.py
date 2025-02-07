@@ -6,7 +6,7 @@ import skimage
 from skimage.exposure import is_low_contrast
 import pandas as pd
 
-# Input: files = directory of files, export_csv = csv that reports brightness
+# Input: files = directory of images, export_csv = csv that reports brightness, contrast for each image
 files = glob.glob("C:/Brad/a_detection_of_seabirds/images_w_objects_cvat_reviewed/*.jpg")
 export_csv = "C:/Brad/a_detection_of_seabirds/results image_character_cvat.csv"
 
@@ -25,10 +25,5 @@ for file in files:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     contrast = gray.std()
     contrast_list.append(contrast)
-
-    #if (is_low_contrast(gray, 0.03)):
-     #   low_contrast_list.append ("low contrast")
-    #else:
-     #   low_contrast_list.append("normal contrast")
 
 pd.DataFrame({"unique_image": image_list, "mean": mean_list, "contrast": contrast_list}).to_csv(export_csv, index=True)
