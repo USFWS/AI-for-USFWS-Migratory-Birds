@@ -8,11 +8,12 @@ from torchvision import transforms
 import csv
 import shutil
 
-## New inputs: root_path = root directory, flight_name = flight folder, model_path = model to apply
+## Inputs: root_path = root directory, flight_name = flight folder, model_path = model to apply
 root_path = "D:/"
 flight_name = "20250125_123300"
 model_path = 'C:/users/bpickens/Desktop/MODELS FOR USE/2024_Nov20_swin_s_augment15_focal_scripted.pt'
 
+# Optional inputs, available to narrow down the results by probability
 max_prob_threshold = 1.0
 min_prob_threshold = 0.0
 
