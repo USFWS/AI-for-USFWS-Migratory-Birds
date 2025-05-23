@@ -1,9 +1,7 @@
-import os
+import label_studio_sdk.converter.imports.coco
 import pandas as pd
 import json
-import csv
-import numpy as np
-from label_studio_converter import coco
+from label_studio_sdk import converter
 
 ## Inputs: csv_file = csv with annotation data; Please see csv_data.columns below and the Label-studio
 # csv template in the github folder for specifications
@@ -12,20 +10,19 @@ from label_studio_converter import coco
 # config = name of label studio config file to export; can be used as labeling interface
 # image_width, image_height
 
-csv_file = 'YOLO8_SACR_mixed_train_March14.csv'
+csv_file = "D:/SACR_models/2023_2025_SACR_model/2023_yolov5_new_pred.csv"
 categories = [{"id":0, "name": "duck_goose"},{"id":1, "name": "sandhill crane"}]
-output_file = "C:/Users/name/Desktop/SACR_detection/YOLO8_SACR_mixed_train_March14_LS.json"
-config = "C:/Users/name/Desktop/SACR_detection/YOLO8_SACR_mixed_train_March14_LS_config_temp.xml"
+
+output_file = "D:/SACR_models/2023_2025_SACR_model/2023_yolov5_new_pred_LS.json"
+#config = "C:/Users/name/Desktop/SACR_detection/YOLO8_SACR_mixed_train_March14_LS_config_temp.xml"
 image_width = 736
 image_height = 736
 
 csv_data = pd.read_csv(csv_file)
 csv_data['image_id']= csv_data['image_id'].astype(int) # change data types, as needed
-csv_data.columns = (['id','image_id','x_min', 'y_min', 'w','h','label_id','label', 'root_url','unique_image_jpg',
-                    'score'])
+# csv_data.columns = (['image_id','x_min', 'y_min', 'w','h','label_id','label', 'root_url','unique_image_jpg',
+                 #   'score'])
 csv_data['annid'] = csv_data.index
-
-print("okay")
 
 # Create lists to fill in, including nested dictionaries
 #categories = []
@@ -40,6 +37,7 @@ def image(row):
     image["id"] = row.image_id
     image["file_name"] = row.unique_image_jpg
     image["root_url"] = row.root_url
+
   #  image["observer"] = row.author
     return image
 
@@ -48,7 +46,7 @@ def annotation(row):
     #annotation["id"] = row.annid
     annotation["image_id"] = row.image_id
     annotation["category_id"] = row.label_id
-    annotation["bbox"] = [row.x_min, row.y_min, row.w, row.h]
+    annotation["bbox"] = [row.xmin, row.ymin, row.w, row.h]
     annotation["ignore"] = 0
     annotation["iscrowd"] = 0
     annotation["area"] = (row.h * row.w)
@@ -74,9 +72,10 @@ data_coco["images"] = images2
 data_coco["categories"] = categories
 data_coco["annotations"] = annotations
 #json dump uses a dict as input
-json.dump(data_coco, open(export_json,"w"), indent=0)
 
-input_file = export_json
+coco_output = open('D:/SACR_models/2023_2025_SACR_model/temp.json', 'w')
+json.dump(data_coco, coco_output)
+coco_output.close()
 
-coco.convert_coco_to_ls(input_file,output_file, out_type='predictions')
+label_studio_sdk.converter.imports.coco.convert_coco_to_ls('D:/SACR_models/2023_2025_SACR_model/temp.json', "D:/SACR_models/2023_2025_SACR_model/2023_yolov5_new_pred_LS.json", out_type= "predictions", image_root_url= ' /data/images/')
 # use 'predictions' or 'results', depending on your application
