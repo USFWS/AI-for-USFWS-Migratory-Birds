@@ -29,7 +29,18 @@ for index, row in annotations.iterrows():  ## iterrows: Pandas iterate over rows
         ymax = ymin +h
         print(xmin, ymin, w, h)
 
-        cv.rectangle (input, (xmin, ymin), (xmax, ymax), (0, 255, 0))
-        new_name = export_path + row['unique_image_jpg']
-        print("new name: ", new_name)
-        cv.imwrite(new_name, input, [int(cv.IMWRITE_JPEG_QUALITY), 95])
+### Allows for different colors for different classes
+       class_index = row['class_index']
+
+        if class_index ==0:
+            cv.rectangle (input, (xmin, ymin), (xmax, ymax), (0, 255, 0))
+            new_name = export_path + row['unique_image_jpg']
+            print("ducks: ", new_name)
+            cv.imwrite(new_name, input, [int(cv.IMWRITE_JPEG_QUALITY), 95])
+
+        if class_index ==1:
+            cv.rectangle (input, (xmin, ymin), (xmax, ymax), (255, 0, 0))
+            new_name = export_path + row['unique_image_jpg']
+            print("cranes: ", new_name)
+            cv.imwrite(new_name, input, [int(cv.IMWRITE_JPEG_QUALITY), 95])
+
