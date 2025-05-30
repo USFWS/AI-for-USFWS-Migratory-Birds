@@ -1,5 +1,4 @@
 ### CONVERT YOLO LABEL FILES (.TXT) TO A CSV
-
 library (tidyr)
 library (dplyr)
 library (filenamer)
@@ -11,12 +10,10 @@ library (plyr)
 # those are not needed for yolo implementation
 
 # Enter your directory
-setwd(file.path('C:', 'Users', 'bpickens', 'OneDrive - DOI', 'Desktop', 'SACR_working', '2023_datasets',
-                'two_step_dataset', 'val', 'labels'))
-
+setwd(file.path('C:', 'temp', 'sacr_modelx', 'May23_dataset', 'train', 'labels'))
 
 # Enter the name of csv to export
-export_csv = "export_val.csv"
+export_csv = "export_train.csv"
 
 # Parent image dimensions
 parent_width = 736
@@ -54,7 +51,7 @@ myData_list <- lapply(files, function(x) {
 
 data2 <- data.table::rbindlist(myData_list)
 
-new_headers <- c("class_index", "center_w", "center_h", "w", "h" , "unique_image")
+new_headers <- c("class_index", "center_w", "center_h", "w", "h" , "unique_image_jpg")
 colnames(data2) <- new_headers  
 
 ## Optional- change class index to class name
@@ -63,7 +60,8 @@ data2$class <- gsub ("1", label_name1, data2$class)
 ## Add more classes as needed
 
 data2[0:6,]
-data3<- data2
+
+data2$unique_image_jpg <- gsub (".txt", ".jpg", data2$unique_image_jpg)
 
 data2$w <- data2$w *parent_width
 data2$h <- data2$h *parent_height
@@ -84,6 +82,5 @@ data2$unique_BB
 
 View(data2)
 table(data2$class)
-
 
 write.table(data2, export_csv, sep=",", row.names=FALSE)
