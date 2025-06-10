@@ -5,22 +5,22 @@
 
 library(dplyr)
 
-setwd(file.path('D:', 'hive_detection'))
+setwd(file.path('D:', 'SACR_models', 'SACR_FIX'))
 
-data1 <- read.table ("Hive_all_annot_Oct2024_v2.csv", 
-            sep =",", header=TRUE, fill=TRUE)
+data1 <- read.table ("June3_ducks.csv", sep =",", header=TRUE, fill=TRUE)
 
-data1$id <- 0
-data1$image_id <- 0
+#data1$id <- 0
+data1$image_id <- data1$unique_image_jpg
+# unique id per parent image
+data1$image_id <- as.numeric(factor(data1$image_id))
 
-names(data1)
+data1$image_id  
+# unique id per annotation
+#data1$id <- data1 %>% group_indices (unique_BB)
+
 View(data1)
 
-# unique id per parent image
-data1$image_id <- data1 %>% group_indices (unique_image_jpg)  
-  
-# unique id per annotation
-data1$id <- data1 %>% group_indices (unique_BB)
+write.table(data1,"export_val4.csv", col.names=TRUE, row.names=FALSE, sep=",")
 
 
 
