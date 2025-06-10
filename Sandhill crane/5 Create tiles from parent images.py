@@ -23,8 +23,9 @@ def tile_file(file: str):
     tile_R_array = np.asarray(tile_R)
     tile_R = np.pad(tile_R_array, [(8, 8), (48, 48)], 'mean')
 
-    tile_name_L = (tiles_export + img_name + "_tile_L.jpg")
-    tile_name_R = (tiles_export + img_name + "_tile_R.jpg")
+    img_new = os.path.basename(img_name)    
+    tile_name_L = (tiles_export + img_new + "_tile_L.jpg")
+    tile_name_R = (tiles_export + img_new + "_tile_R.jpg")
 
     print(tile_name_L)
     print(tile_name_R)
