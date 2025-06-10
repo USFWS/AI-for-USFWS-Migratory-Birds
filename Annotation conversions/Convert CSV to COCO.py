@@ -17,7 +17,7 @@ categories = [{"id":1, "name": "duck_goose"},{"id":2, "name": "sandhill crane"}]
 
 csv_data = pd.read_csv(csv_file)
 csv_data['image_id']= csv_data['image_id'].astype(int)
-csv_data.columns = (['id','image_id','unique_image_jpg','x_min', 'y_min', 'w','h','label','label_id','author',
+csv_data.columns = (['id','image_id','unique_image_jpg','xmin', 'ymin', 'w','h','label','label_id','author',
                      'bbname','unique_image_path'])
 csv_data['annid'] = csv_data.index
 
