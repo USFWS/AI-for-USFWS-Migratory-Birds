@@ -55,7 +55,7 @@ def convert_coco_json_to_yolo_txt(output_path, json_file):
             category_name = category["name"]
             f.write(f"{category_name}\n")
 
-    for image in tqdm(json_data["images"], desc="Annotation txt for each iamge"):
+    for image in tqdm(json_data["images"], desc="Annotation txt for each image"):
         img_id = image["id"]
         img_name = image["file_name"]
         img_width = image["width"]
