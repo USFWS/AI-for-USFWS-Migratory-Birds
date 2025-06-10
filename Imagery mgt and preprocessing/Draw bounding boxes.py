@@ -9,7 +9,7 @@ import os
 
 annotations = 'E:/2023_May12_all_ducks/export_train.csv'
 image_path = 'E:/2023_May12_all_ducks/train_good2/'
-export_path = 'E:/2023_May12_all_ducks/train_good2/'
+export_path = image_path
 
 annotations = pandas.read_csv(annotations)
 #annotations.columns = (['image_id', 'xmin', 'ymin', 'w', 'h', 'label_id', 'unique_image_jpg'])
