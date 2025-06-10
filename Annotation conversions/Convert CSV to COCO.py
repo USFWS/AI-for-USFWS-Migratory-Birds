@@ -30,7 +30,7 @@ def image(row):
     image["width"] = width
     image["height"] = height
     image["id"] = row.image_id
-    image["file_name"] = row.unique_image_path
+    image["file_name"] = row.unique_image_jpg
   # image["observer"] = row.author # if needed
     return image
 
