@@ -20,7 +20,7 @@ def convert_coco_json_to_csv(filename):
     js = json.load(open(filename, 'r'))  # read & parse JSON string and convert it to a Python Dictionary
     out_file = filename[:-5]
     out = open(out_file + '_json_data_to_CSV.csv', 'w')  # open for writing to file
-    out.write('image_id, x_min,y_min,w,h,label_id \n')  #
+    out.write('image_id, xmin,ymin,w,h,label_id \n')  #
 
     all_ids = []
     for im in js['images']:
@@ -34,17 +34,17 @@ def convert_coco_json_to_csv(filename):
         label_id = ann['category_id']
         all_ids_ann.append(label_id)
         #  print(label)
-        x_min = ann['bbox'][0]
-        #   print (x_min)
-        all_ids_ann.append(x_min)
-        y_min = ann['bbox'][1]
-        all_ids_ann.append(y_min)
+        xmin = ann['bbox'][0]
+        #   print (xmin)
+        all_ids_ann.append(xmin)
+        ymin = ann['bbox'][1]
+        all_ids_ann.append(ymin)
         w = ann['bbox'][2]
         all_ids_ann.append(w)
         h = ann['bbox'][3]
         all_ids_ann.append(h)
 
-        out.write('{},{},{},{},{},{}\n'.format(image_id, x_min, y_min, w, h, label_id))
+        out.write('{},{},{},{},{},{}\n'.format(image_id, xmin, ymin, w, h, label_id))
 
     all_ids = set(all_ids)
     all_ids_ann = set(all_ids_ann)
