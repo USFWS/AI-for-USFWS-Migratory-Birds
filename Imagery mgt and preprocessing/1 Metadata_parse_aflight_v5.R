@@ -12,25 +12,27 @@ library (lubridate)
 
 # Enter your directory
 #setwd(file.path('C:', 'Users', 'bpickens', 'OneDrive - DOI', 'Desktop', 'Seabird_workflow'))##
-
-setwd(file.path('C:', 'Brad', 'aflight_parsing'))##
+setwd(file.path('C:', 'Brad', 'aflights_new'))##
 
 # Input: file name
-input1 <- "20250125_123300_box.aflight"
+input1 <- "20250826_124700.aflight"
 
 # WGS1984 projection for shapefile
 crs1 <- 4326
 
-export_spatial <- substr(input1,1,nchar(input1)-8)
-export_spatial <- paste0(export_spatial, ".shp")
+export_name <- substr(input1,1,nchar(input1)-8)
+export_shape_dir <- "shapefiles"
+if (!dir.exists(file.path(export_shape_dir))) {
+  dir.create(file.path(export_shape_dir))
+}
+
+export_spatial <- paste0(export_shape_dir, "/", export_name, ".shp")
 
 path2 <- paste0(getwd(),"/",input1)
 path3 <- substr(path2,1,nchar(path2)-8)
 path <- paste0(path3,"_orig.aflight")
 
-
 # copy aflight and rename one as xml
-input2 <- 
 file.copy(input1, path)
 
 new_path <- paste(path3,".xml")
@@ -45,10 +47,20 @@ xml_address <- new_path
 xml_base = basename(xml_address)
 xml_base = substr(xml_base,1,nchar(xml_base)-4)
 
+images_dir <- "image_metadata"
+if (!dir.exists(file.path(images_dir))) {
+  dir.create(file.path(images_dir))
+}
 
-output_file <- paste0("Metadata_",xml_base,"_images.csv")
+camera_dir <- "camera_metadata"
+if (!dir.exists(file.path(camera_dir))) {
+  dir.create(file.path(camera_dir))
+}
 
-output_cam <- paste0("Metadata_", xml_base,"_cameras.csv")
+# paste0(export_shape_dir, "/", export_name, ".shp")
+
+output_file <- paste0(images_dir, "/Metadata_",xml_base,"_images.csv")
+output_cam <- paste0(camera_dir, "/Metadata_", xml_base,"_cameras.csv")
 output_detections <- paste0(xml_base,"_detections.csv")
 unique_image_list <- paste0(xml_base, "_images_w_objects.csv")
 
@@ -58,7 +70,6 @@ xml_data <- read_xml(xml_address)
 # xml_structure(xml_data)
 all_nodes <- xml_find_all(xml_data,"//FlightEntity//Cameras//CameraEntity//Captures//CaptureEntity")
 #View(all_nodes)
-
 a1 <- data.frame (
   filename = xml_find_first(all_nodes, ".//Filename") %>% xml_text(),
   computer_time = xml_find_first(all_nodes, ".//ComputerTime") %>% xml_text(),
@@ -121,10 +132,8 @@ a1$lat = as.numeric(a1$lat)
 a1$long = as.numeric(a1$long)
 a1$filename
 #a1$computer_time = as.character(a1$computer_time)
-
 #######################################
 ## Split date, time
-
 # For Computer time replace 'T' with '_'
 a1$computer_time <- gsub('T',',', a1$computer_time) 
 
@@ -154,18 +163,14 @@ a1$filename <- NULL
 
 # remove duplicates, as needed
 a1[!duplicated(a1),]
-
 a1$unique_image
-
 # removes overview files
 a1 <- a1 %>% filter(str_detect(a1$unique_image, "^C"))
-
 
 # write column of image lat, long
 a1$image_long <- (a1$BLLong + a1$TRLong) / 2
 a1$image_lat <- (a1$BLLat + a1$TRLat) / 2
 
-#####
 ### Write table
 write.table(a1, output_file, sep =",", row.names=FALSE)
 
@@ -181,13 +186,10 @@ plot(new_sf)
 # for mid_Atlantic = UTM18, EPSG:32619
 utm_proj <- st_transform(new_sf, crs = crs1)
 
-names(utm_proj)
-
 utm_proj %>% 
   st_coordinates()
 
 st_write(utm_proj, export_spatial, driver = "ESRI Shapefile")  
-
 
 ##############################
 #####cameras
@@ -329,7 +331,6 @@ a5$imageGUID <- NULL
 a5$unique_image <- NULL
 a5$flight_name <- NULL
 names(a5)
-
 
 a5 <- a5[,c("unique_image_jpg", "class","score", "xmin", "ymin", "w", "h", "unique_BB")]
 
