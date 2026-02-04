@@ -1,0 +1,72 @@
+Setting Up Label Studio For Active Learning!
+
+C:\Users\aware\Desktop\label_studio_projects
+Step 1: Set Up Your Virtual Environment and Label Studio
+
+Configure a virtual environment and install Label-studio as directed on the Label-Studio website
+Within the virtual environment, apply these 2 settings:
+> set LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
+> set LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=C:\\users\\aware\\desktop\\label_studio_projects
+
+Note: Be sure to use your own C:\\ path where you will store images. Later, you can specify subfolders under this path for a specific project.
+To start the program:
+> label-studio start
+
+
+Step 2: Configure Local Storage
+Create a new project in Label-studio and determine your labeling interface.
+
+To set up your local storage:
+a. Go to your Project and then Settings (box in upper right)
+b. Go to Cloud Storage.
+c. Click Add Source Storage 
+d. Select Local files from the Storage Type options.
+e. Give this directory a Storage Title
+f. Set the Absolute local path. For Windows, set it to: 
+	c:\users\aware\desktop\label_studio_projects\new_annotations
+[this must include your environment path set in Step 1 above, as a starting point, but can include subfolders]
+g. Check the box for Treat every bucket object as a source file
+h. Check the connection and save if it is successful.
+i. After the storage is connected, you may need to come back and click sync, only if needed.
+
+Step 3: Convert your annotations to Label-studio json format
+
+Under AI-for-USFWS-Migratory-Birds > Convert CSV to Label Studio json 2025.py
+This script converts your csv annotations to COCO, then into Label-studio json using Pycharm/Python
+In your Label-studio project > Import > add your newly created Label-studio json. If everything is correct, your images with show up with their annotation prediction boxes.
+"/data/local-files/?d=SACR_2025_annot_tiles%5
+Above, SACR_2025_annot_tiles is directory under the local source directory
+
+If annotations do not show up:
+- Import > add your images directly here
+- To the right of your images (as below), click the </>
+ 
+The following is displayed:
+ 
+From this information, you can see the image path. Above the path is: 
+/data/local-files/?d=Users…
+Open the Label-studio json in a text editor
+Use the Find and replace function to change the directory to what you see in Label-studio (as above),
+This fixes the path. You will need to delete all existing tasks. Then, go back and import your Label-studio json file. Importing this file will be bring up the images in your local storage along with the annotations.
+
+4. Import predictions to existing tasks
+In some cases, you may want to apply predictions to already imported tasks. For example, you can retrieve tasks from Label Studio, then create a new prediction:
+In [1]:
+from label_studio_sdk.label_interface.objects import PredictionValue
+
+li = ls.projects.get(id=project.id).get_label_interface()
+
+for task in ls.tasks.list(project=project.id, include=['id']):
+    prediction = PredictionValue(
+        # Tag predictions with specific model version
+        model_version='my_model_v1',
+        # Define your labels here
+        result=[
+            li.get_control('image_class').label(['Dog']),
+        ]
+    )
+    ls.predictions.create(task=task.id, **prediction.model_dump())
+
+
+
+
